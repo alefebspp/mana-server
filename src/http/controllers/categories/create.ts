@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { PrismaCategoriesRepository } from '@/repositories/prisma/prisma-categories-repository'
-import { CreateCategoryUseCase } from '@/use-cases/categories/create'
+import { makeCreateCategoryUseCase } from '@/use-cases/factories/categories/make-create-category-use-case'
 
 
 export async function createCategory(request: FastifyRequest, reply: FastifyReply) {
@@ -14,8 +13,7 @@ export async function createCategory(request: FastifyRequest, reply: FastifyRepl
   const data = createCategoryBodySchema.parse(request.body)
   
   try {
-    const categoriesRepository = new PrismaCategoriesRepository()
-    const createCategoryUseCase = new CreateCategoryUseCase(categoriesRepository)
+    const createCategoryUseCase = makeCreateCategoryUseCase()
     await createCategoryUseCase.execute(data)
   } catch (error) {
     throw error
