@@ -1,7 +1,7 @@
 import { CategoriesRepository } from '@/repositories/categories-repository'
 
 
-export class ListCategoriesUseCae {
+export class ListCategoriesUseCase {
 
   constructor(private categoriesRepository: CategoriesRepository){}
 
