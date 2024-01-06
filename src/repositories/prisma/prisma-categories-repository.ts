@@ -4,6 +4,15 @@ import { prisma } from '@/lib/prisma'
 
 
 export class PrismaCategoriesRepository implements CategoriesRepository {
+
+  async find(id: string): Promise<Category | null> {
+    const category = await prisma.category.findUnique({where: {
+      id
+    }})
+
+    return category
+  }
+ 
   async create(data: Prisma.CategoryCreateInput): Promise<void> {
     await prisma.category.create({data})
   }
@@ -33,6 +42,10 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     })
 
     return categories
+  }
+
+  async hide(id: string): Promise<void> {
+    await prisma.category.update({where: {id}, data: {hidden: true}})
   }
 
 }

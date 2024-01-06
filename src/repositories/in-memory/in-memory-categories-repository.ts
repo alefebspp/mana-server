@@ -5,11 +5,22 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
 
   public categories: Category[] = []
 
+  async find(id: string): Promise<Category | null> {
+    const category = this.categories.find(category => category.id === id)
+
+    if(!category){
+      return null
+    }
+
+    return category
+  }
+
   async create(data: Prisma.CategoryCreateInput): Promise<void> {
     const category = {
       ...data,
       id: `${this.categories.length}`,
-      belongs_to: data.belongs_to as string | null
+      belongs_to: data.belongs_to as string | null,
+      hidden: false
     }
 
     this.categories.push(category)
@@ -22,6 +33,13 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
       return [...parentCategory, ...childCategories]
     }
     return this.categories
+  }
+
+  async hide(id: string): Promise<void> {
+    const category = this.categories.find(category => category.id === id)
+    if(category){
+      category.hidden = true
+    }
   }
 
 }
