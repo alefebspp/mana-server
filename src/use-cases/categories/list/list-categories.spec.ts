@@ -33,4 +33,15 @@ describe('List Categories Use Case', () => {
     expect(filteredCategories[1].code).toBe('2.1')
   })
 
+  it('should filter for hidden categories if hidden param is defined', async () => {
+    await categoriesRepository.create({description: 'Receitas Extras', code: '3', nature: 'contribution', hidden: true})
+    await categoriesRepository.create({description: 'Despesas Extras', code: '4', nature: 'expense', hidden: true})
+
+    const categories = await sut.execute(undefined, true)
+
+    const allCategoriesAreHidden = categories.every(category => category.hidden == true)
+
+    expect(allCategoriesAreHidden).toBe(true)
+  })
+
 })

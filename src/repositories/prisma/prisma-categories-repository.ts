@@ -5,6 +5,13 @@ import { prisma } from '@/lib/prisma'
 
 export class PrismaCategoriesRepository implements CategoriesRepository {
 
+
+  async update(id: string, data: Omit<Prisma.CategoryUpdateInput, 'id'>): Promise<void> {
+    await prisma.category.update({where: {
+      id
+    }, data: {...data}})
+  }
+
   async find(id: string): Promise<Category | null> {
     const category = await prisma.category.findUnique({where: {
       id
@@ -17,9 +24,17 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     await prisma.category.create({data})
   }
 
-  async list(belongs_to?: string | undefined): Promise<Category[]> {
+  async list(belongs_to?: string | undefined, hidden?: boolean): Promise<Category[]> {
 
-    const where = {}
+    const where = {
+      hidden: false
+    }
+
+    if(hidden){
+      Object.assign(where, {
+        hidden: true
+      })
+    }
 
     if(belongs_to){
       Object.assign(where, {
@@ -42,10 +57,6 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     })
 
     return categories
-  }
-
-  async hide(id: string): Promise<void> {
-    await prisma.category.update({where: {id}, data: {hidden: true}})
   }
 
 }
