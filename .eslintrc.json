@@ -31,8 +31,6 @@
         "semi": [
             "error",
             "never"
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-useless-catch": "off"
+        ]
     }
 }
