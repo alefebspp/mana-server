@@ -40,6 +40,7 @@ model Category {
   nature      String
   code        String
   belongs_to  String?
+  hidden      Boolean @default(false)
 
   @@map("categories")
 }

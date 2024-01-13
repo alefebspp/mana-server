@@ -4,13 +4,37 @@ import { prisma } from '@/lib/prisma'
 
 
 export class PrismaCategoriesRepository implements CategoriesRepository {
+
+
+  async update(id: string, data: Omit<Prisma.CategoryUpdateInput, 'id'>): Promise<void> {
+    await prisma.category.update({where: {
+      id
+    }, data: {...data}})
+  }
+
+  async find(id: string): Promise<Category | null> {
+    const category = await prisma.category.findUnique({where: {
+      id
+    }})
+
+    return category
+  }
+ 
   async create(data: Prisma.CategoryCreateInput): Promise<void> {
     await prisma.category.create({data})
   }
 
-  async list(belongs_to?: string | undefined): Promise<Category[]> {
+  async list(belongs_to?: string | undefined, hidden?: boolean): Promise<Category[]> {
 
-    const where = {}
+    const where = {
+      hidden: false
+    }
+
+    if(hidden){
+      Object.assign(where, {
+        hidden: true
+      })
+    }
 
     if(belongs_to){
       Object.assign(where, {

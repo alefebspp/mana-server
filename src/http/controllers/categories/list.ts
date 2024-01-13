@@ -1,19 +1,17 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { PrismaCategoriesRepository } from '@/repositories/prisma/prisma-categories-repository'
-import { ListCategoriesUseCae } from '@/use-cases/categories/list'
+import { makeListCategoriesUseCase } from '@/use-cases/factories/categories/make-list-categories-use-case'
 
 type Request = FastifyRequest<{
-  Querystring: {belongs_to: string}
+  Querystring: {belongs_to: string, hidden: boolean}
 }>
 
 export async function listCategories(request: Request, reply: FastifyReply){
 
-  const {belongs_to} = request.query
+  const {belongs_to, hidden} = request.query
 
   try {
-    const categoriesRepository = new PrismaCategoriesRepository()
-    const listCategoriesUseCase = new ListCategoriesUseCae(categoriesRepository)
-    const categories = await listCategoriesUseCase.execute(belongs_to)
+    const listCategoriesUseCase = makeListCategoriesUseCase()
+    const categories = await listCategoriesUseCase.execute(belongs_to, hidden)
     return reply.status(200).send(categories)
 
   } catch (error) {
