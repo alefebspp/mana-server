@@ -38,9 +38,8 @@ model Category {
   id          String  @id @default(uuid())
   description String
   nature      String
-  code        String
+  code        Int
   belongs_to  String?
-  hidden      Boolean @default(false)
 
   @@map("categories")
 }
