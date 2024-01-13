@@ -2,7 +2,7 @@
 import {expect, it, describe, beforeEach} from 'vitest'
 import { InMemoryCategoriesRepository } from '@/repositories/in-memory/in-memory-categories-repository'
 import { UpdateCategoryUseCase } from './update-category-use-case'
-import { CategoryNotFoundError } from '../errors/category-not-found-error'
+import { CategoryNotFoundError } from './errors/category-not-found-error'
 
 let categoriesRepository: InMemoryCategoriesRepository
 let sut: UpdateCategoryUseCase

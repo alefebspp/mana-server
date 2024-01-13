@@ -1,6 +1,6 @@
 import { CategoriesRepository } from '@/repositories/categories-repository'
 import { Prisma } from '@prisma/client'
-import { CategoryNotFoundError } from '../errors/category-not-found-error'
+import { CategoryNotFoundError } from './errors/category-not-found-error'
 
 
 export class UpdateCategoryUseCase {
