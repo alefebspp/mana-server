@@ -1,5 +1,5 @@
 import { PrismaCategoriesRepository } from '@/repositories/prisma/prisma-categories-repository'
-import { CreateCategoryUseCase } from '@/use-cases/categories/create'
+import { CreateCategoryUseCase } from '@/use-cases/create-category-use-case'
 
 
 export function makeCreateCategoryUseCase(){

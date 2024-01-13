@@ -1,4 +1,4 @@
-import { CategoryNotFoundError } from '@/use-cases/categories/errors/category-not-found-error'
+import { CategoryNotFoundError } from '@/use-cases/errors/category-not-found-error'
 import { makeFindCategoryUseCase } from '@/use-cases/factories/categories/make-find-category-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
