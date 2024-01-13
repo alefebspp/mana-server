@@ -29,8 +29,10 @@ describe('List Categories Use Case', () => {
 
     const filteredCategories = await sut.execute(parentId)
 
-    expect(filteredCategories[0].code).toBe('2')
-    expect(filteredCategories[1].code).toBe('2.1')
+    expect(filteredCategories).toEqual([
+      expect.objectContaining({code: '2'}),
+      expect.objectContaining({code: '2.1'})
+    ])
   })
 
   it('should filter for hidden categories if hidden param is defined', async () => {

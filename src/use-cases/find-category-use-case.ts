@@ -1,5 +1,5 @@
 import { CategoriesRepository } from '@/repositories/categories-repository'
-import { CategoryNotFoundError } from '../errors/category-not-found-error'
+import { CategoryNotFoundError } from './errors/category-not-found-error'
 
 export class FindCategoryUseCase {
   constructor(private categoriesRepository: CategoriesRepository){}
