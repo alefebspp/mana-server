@@ -12,7 +12,7 @@ export async function appRoutes(app: FastifyInstance) {
   app.post('/categories', createCategory)
   app.get('/categories', listCategories)
   app.get('/categories/:categoryId', findCategory)
-  app.patch('/categories/:categoryId', updateCategory)
+  app.patch('/categories/update/:categoryId', updateCategory)
 }
 
 
