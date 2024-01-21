@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
-import { makeFindChurchUseCase } from '@/use-cases/factories/make-find-church-use-case'
+import { makeFindChurchUseCase } from '@/use-cases/factories/church/make-find-church-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 type Request = FastifyRequest<{

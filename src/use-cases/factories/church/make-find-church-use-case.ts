@@ -1,5 +1,5 @@
 import { PrismaChurchsRepository } from '@/repositories/prisma/prisma-churchs-repository'
-import { FindChurchUseCase } from '../find-church-use-case'
+import { FindChurchUseCase } from '../../find-church-use-case'
 
 export function makeFindChurchUseCase() {
   const churchsRepository = new PrismaChurchsRepository()

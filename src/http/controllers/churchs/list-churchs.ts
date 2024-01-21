@@ -1,4 +1,4 @@
-import { makeListChurchsUseCase } from '@/use-cases/factories/make-list-churchrs-use-case'
+import { makeListChurchsUseCase } from '@/use-cases/factories/church/make-list-churchrs-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 

@@ -1,5 +1,5 @@
 import { PrismaChurchsRepository } from '@/repositories/prisma/prisma-churchs-repository'
-import { ListChurchsUseCase } from '../list-churchs-use-case'
+import { ListChurchsUseCase } from '../../list-churchs-use-case'
 
 export function makeListChurchsUseCase() {
   const churchsRepository = new PrismaChurchsRepository()

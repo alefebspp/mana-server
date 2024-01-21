@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { makeCreateChurchUseCase } from '@/use-cases/factories/make-create-church-use-case'
+import { makeCreateChurchUseCase } from '@/use-cases/factories/church/make-create-church-use-case'
 import { z } from 'zod'
 
 

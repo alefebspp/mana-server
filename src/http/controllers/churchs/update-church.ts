@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { makeUpdateChurchUseCase } from '@/use-cases/factories/make-update-church-use-case'
+import { makeUpdateChurchUseCase } from '@/use-cases/factories/church/make-update-church-use-case'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 
 type Request = FastifyRequest<{
