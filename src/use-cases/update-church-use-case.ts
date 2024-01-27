@@ -6,7 +6,6 @@ interface UpdateChurchRequest {
   leader?:  string
   email?:  string
   cnpj?:  string
-  user_id?: string; 
 }
 
 interface UpdateChurchParams {

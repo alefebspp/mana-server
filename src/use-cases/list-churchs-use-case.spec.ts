@@ -23,7 +23,7 @@ describe('List churchs use case', () => {
 
   it('should list all churchs properly', async() => {
 
-    const {churchs} = await sut.execute()
+    const {churchs} = await sut.execute({userId:'b5be3969-e735-4b93-bebf-e4ee40fa9dc6'})
 
     expect(churchs).toEqual([
       expect.objectContaining({user_id:'b5be3969-e735-4b93-bebf-e4ee40fa9dc6' })

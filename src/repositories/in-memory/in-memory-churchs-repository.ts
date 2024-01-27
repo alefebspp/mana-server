@@ -5,11 +5,11 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryChurchsRepository implements ChurchsRepository {
   public churchs: Church[] = []
 
-  async list(): Promise<Church[]> {
-    return this.churchs
+  async list(userId: string): Promise<Church[]> {
+    return this.churchs.filter(church => church.user_id === userId)
   }
 
-  async update(data: Omit<Prisma.ChurchUpdateInput, 'id'>, church_id: string): Promise<void> {
+  async update(data: Omit<Prisma.ChurchUpdateInput, 'id' | 'user'>, church_id: string): Promise<void> {
     const church = this.churchs.find(church => church.id === church_id)
 
     if(church){

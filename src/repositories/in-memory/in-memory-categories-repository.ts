@@ -1,5 +1,5 @@
 import { Category, Prisma } from '@prisma/client'
-import { CategoriesRepository } from '../categories-repository'
+import { CategoriesRepository, ListCategoryRequest } from '../categories-repository'
 
 export class InMemoryCategoriesRepository implements CategoriesRepository {
   
@@ -23,19 +23,20 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
     return category
   }
 
-  async create(data: Prisma.CategoryCreateInput): Promise<void> {
+  async create(data: Omit<Prisma.CategoryUncheckedCreateInput, 'id'>): Promise<void> {
     const category = {
       ...data,
       id: `${this.categories.length}`,
       belongs_to: data.belongs_to as string | null,
-      hidden: data.hidden ?? false
+      hidden: data.hidden ?? false,
+      user_id: data.user_id as string | null
     }
 
     this.categories.push(category)
   }
 
-  async list(belongs_to?: string | undefined, hidden?: boolean): Promise<Category[]> {
-    let filteredCategories = this.categories
+  async list({belongs_to, hidden, userId}: ListCategoryRequest): Promise<Category[]> {
+    let filteredCategories = this.categories.filter(category => category.user_id === userId)
 
     if(hidden){
       filteredCategories = filteredCategories.filter(category => category.hidden == true)

@@ -10,14 +10,14 @@ export async function createChurch(request: FastifyRequest, reply: FastifyReply)
     leader: z.string(),
     email: z.string().email(),
     cnpj: z.string(),
-    user_id: z.string().uuid()
   })
 
   const data = createChurchBodySchema.parse(request.body)
+  const user_id = request.user.sub
 
   try {
     const createChruchUseCase = makeCreateChurchUseCase()
-    await createChruchUseCase.execute(data)
+    await createChruchUseCase.execute({...data, user_id})
 
     return reply.status(201).send()
   } catch (error) {

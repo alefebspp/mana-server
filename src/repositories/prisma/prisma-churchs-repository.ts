@@ -11,13 +11,15 @@ export class PrismaChurchsRepository implements ChurchsRepository {
     })
   }
 
-  async list(): Promise<Church[]> {
-    const churchs = await prisma.church.findMany()
+  async list(userId: string): Promise<Church[]> {
+    const churchs = await prisma.church.findMany({where: {
+      user_id: userId
+    }})
 
     return churchs
   }
 
-  async update(data: Omit<Prisma.ChurchUpdateInput, 'id'>, church_id: string): Promise<void> {
+  async update(data: Omit<Prisma.ChurchUpdateInput, 'id' | 'user'>, church_id: string): Promise<void> {
     await prisma.church.update({
       where: {
         id: church_id

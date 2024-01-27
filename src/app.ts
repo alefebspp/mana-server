@@ -5,6 +5,7 @@ import { appRoutes } from './http/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
 import { churchRoutes } from './http/routes/churchs.routes'
+import { categoriesRoutes } from './http/routes/categories.routes'
 
 export const app = fastify()
 
@@ -12,7 +13,9 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET
 })
 app.register(appRoutes)
+
 app.register(churchRoutes, {prefix: 'churchs'})
+app.register(categoriesRoutes, {prefix: 'categories'})
 
 app.register(cors, { 
   origin: '*'

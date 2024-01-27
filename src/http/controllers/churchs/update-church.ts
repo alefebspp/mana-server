@@ -14,7 +14,6 @@ export async function updateChurch(request: Request, reply: FastifyReply){
     leader: z.string().optional(),
     email: z.string().email().optional(),
     cnpj: z.string().optional(),
-    user_id: z.string().uuid().optional()
   })
 
   const data = updateChurchBodySchema.parse(request.body)

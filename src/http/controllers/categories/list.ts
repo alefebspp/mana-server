@@ -8,10 +8,11 @@ type Request = FastifyRequest<{
 export async function listCategories(request: Request, reply: FastifyReply){
 
   const {belongs_to, hidden} = request.query
+  const userId = request.user.sub
 
   try {
     const listCategoriesUseCase = makeListCategoriesUseCase()
-    const categories = await listCategoriesUseCase.execute(belongs_to, hidden)
+    const categories = await listCategoriesUseCase.execute({belongs_to, hidden, userId})
     return reply.status(200).send(categories)
 
   } catch (error) {

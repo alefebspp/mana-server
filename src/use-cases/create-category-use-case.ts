@@ -4,6 +4,7 @@ interface CreateCategoryRequest {
   description: string;
   nature: string;
   belongs_to: string | null;
+  user_id: string;
 }
 
 export class CreateCategoryUseCase{
@@ -12,7 +13,7 @@ export class CreateCategoryUseCase{
 
 
   async execute(data: CreateCategoryRequest){
-    const categories = await this.categoriesRepository.list(data.belongs_to ?? undefined)
+    const categories = await this.categoriesRepository.list({userId: data.user_id, belongs_to: data.belongs_to ?? undefined})
     
     const lastCode = categories[categories.length - 1]?.code
 

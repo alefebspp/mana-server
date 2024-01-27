@@ -18,7 +18,8 @@ model User {
   verified_at   DateTime?
   created_at    DateTime  @default(now())
 
-  churchs Church[]
+  churchs    Church[]
+  categories Category[]
 
   @@map("users")
 }
@@ -41,6 +42,9 @@ model Category {
   code        String
   belongs_to  String?
   hidden      Boolean @default(false)
+
+  user    User?   @relation(fields: [user_id], references: [id])
+  user_id String?
 
   @@map("categories")
 }

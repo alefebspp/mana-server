@@ -1,5 +1,5 @@
 import { Category, Prisma } from '@prisma/client'
-import { CategoriesRepository } from '../categories-repository'
+import { CategoriesRepository, ListCategoryRequest } from '../categories-repository'
 import { prisma } from '@/lib/prisma'
 
 
@@ -20,13 +20,21 @@ export class PrismaCategoriesRepository implements CategoriesRepository {
     return category
   }
  
-  async create(data: Prisma.CategoryCreateInput): Promise<void> {
+  async create(data: Omit<Prisma.CategoryUncheckedCreateInput, 'id'>): Promise<void> {
     await prisma.category.create({data})
   }
 
-  async list(belongs_to?: string | undefined, hidden?: boolean): Promise<Category[]> {
+  async list({belongs_to, hidden, userId}: ListCategoryRequest): Promise<Category[]> {
 
     const where = {
+      OR: [
+        {
+          user_id: userId
+        },
+        {
+          user_id: null
+        }
+      ],
       hidden: false
     }
 

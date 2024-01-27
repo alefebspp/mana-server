@@ -17,6 +17,7 @@ describe('Create Category Use Case', () => {
       description: 'Receitas',
       nature: 'contribution',
       belongs_to: null,      
+      user_id: 'fake-id'
     }
 
     await sut.execute(baseCategory)
@@ -27,7 +28,8 @@ describe('Create Category Use Case', () => {
     const baseCategory = {
       description: 'Receitas',
       nature: 'contribution',
-      belongs_to: null,      
+      belongs_to: null,
+      user_id: 'fake-id'      
     }
 
     await sut.execute(baseCategory)
@@ -35,7 +37,8 @@ describe('Create Category Use Case', () => {
     const childCategory = {
       description: 'Receitas extras',
       nature: 'contribution',
-      belongs_to: categoriesRepository.categories[0].id,      
+      belongs_to: categoriesRepository.categories[0].id,  
+      user_id: 'fake-id'    
     }
 
     await sut.execute(childCategory)
@@ -44,6 +47,7 @@ describe('Create Category Use Case', () => {
       description: 'Receitas extras filho',
       nature: 'contribution',
       belongs_to: categoriesRepository.categories[1].id, 
+      user_id: 'fake-id'
     }
 
     await sut.execute(childOfChildCategory)

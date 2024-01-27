@@ -10,11 +10,13 @@ export async function createCategory(request: FastifyRequest, reply: FastifyRepl
     belongs_to: z.string().nullable()
   })
 
+
   const data = createCategoryBodySchema.parse(request.body)
+  const user_id = request.user.sub
   
   try {
     const createCategoryUseCase = makeCreateCategoryUseCase()
-    await createCategoryUseCase.execute(data)
+    await createCategoryUseCase.execute({...data, user_id})
   } catch (error) {
     throw error
   }
