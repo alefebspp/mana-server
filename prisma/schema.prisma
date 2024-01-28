@@ -33,6 +33,18 @@ model Church {
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
+
+  events ChurchEvent[]
+}
+
+model ChurchEvent {
+  id        String @id @default(uuid())
+  name      String
+  week_day  Int
+  hour      String
+  church_id String
+
+  church Church @relation(fields: [church_id], references: [id])
 }
 
 model Category {

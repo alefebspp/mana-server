@@ -6,6 +6,7 @@ import { ZodError } from 'zod'
 import { env } from './env'
 import { churchRoutes } from './http/routes/churchs.routes'
 import { categoriesRoutes } from './http/routes/categories.routes'
+import { churchEventsRoutes } from './http/routes/church-events.routes'
 
 export const app = fastify()
 
@@ -16,6 +17,7 @@ app.register(appRoutes)
 
 app.register(churchRoutes, {prefix: 'churchs'})
 app.register(categoriesRoutes, {prefix: 'categories'})
+app.register(churchEventsRoutes, {prefix: 'churchEvents'})
 
 app.register(cors, { 
   origin: '*'
